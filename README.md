@@ -1,23 +1,17 @@
-# CTF-Course
+# Welcome to my blog
 
-## Details
-July 15 - August 15
+## whoami
+A dude, dressed as a dude, disgused as another dude. 
 
-10:45 AM - 12:15 PM
+Learning the ropes of offensive security. 
 
-Evans 134 (iSuite)
+A contributing member of the University of Delaware CTF team, the Bluehens.
 
-**Professor**
-* Andrew Novocin	*andynovo@udel.edu*
-
-**TAs**
-* Landon Jones		*lhjones@udel.edu*
-* Liam Jordan		*lkj@udel.edu*
-* Matthew Zelinsky	*zelinsky@udel.edu*
+**Contact Information**
+* Charles Adams	*caadams@udel.edu*
 
 
-## CTF Website (Grading)
-Complete challenges in our [UDCTF](https://udctf.com)!
+## CTF Writeups 
+* [UTCTF](https://caadams4.github.io/cyberblog/utctf)!
 
-### Weekly Growth Report
-Every week, you should submit a personal growth report following this format: 
+
