@@ -62,12 +62,15 @@ This may come be handy in our next challenge.
 
 * Many servers are administered remotely using ssh, witch listens on port 22. ssh encrypts with a passphrase and, unless you know the passphrase, its totally secure. 
 
+### Recon
 
 Looking at our nmap scan, we can see ssh is open on our target. 
 
 ![nmap2](smb/nmap%20server.png)
 
 Note the information gathered infiltrating the server via SMB. A few users have used the password "abracadabra" and have been instructed to append it with a special character for security.
+
+### Exploit Development
 
 Crystal Ball, Wade Coldwater, Jay Walker, Holly Wood, and Arty F. are our target users. 
 
@@ -91,6 +94,8 @@ We need generate an ssh key for each possible passphrase, for each user, and try
 Sounds like a job for a brute force bash script.
 
 ![bash](ssh/exploit_script.png)
+
+### Run the Exploit
 
 Initiate the script. 
 
