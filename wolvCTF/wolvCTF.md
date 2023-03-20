@@ -13,9 +13,9 @@ A great set of challenges. I didn't have much time this weekend, but I tried my 
 
 ### Examine the code
 
-The challenge includes one binary file and is reminiscent of an old license key crack. Let's download the [homework_help](./homework_help) binary and examine with Ghidra. 
+The challenge includes one binary file and is reminiscent of an old license key crack. Let's download the [homework_help](./homework_help) binary and examine it with Ghidra. 
 
-* If you're not familiar with Ghidra, it's a sick NSA tool used to decompile binaries. [Check it out on Github](https://github.com/NationalSecurityAgency/ghidra)
+* If you're not familiar with Ghidra, it's a tool used to decompile binaries. [Check it out](https://github.com/NationalSecurityAgency/ghidra)
 
 Here's the decompiled main function:
 
