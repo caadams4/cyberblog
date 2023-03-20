@@ -52,15 +52,15 @@ We must write a script to compute the first XOR, 0x41 ^ 0x36, which resolves to 
 
 * 0x41 ^ 0x36 == 0x57 == 'w'
                   /
-      ______------
+      ------------
     /
 * 0x57 ^ 0x14 == 0x63 == 'c'
                   /
-      ______------
+      ------------
     /
 * result ^ next arr[i] == next char
                   /
-      ______------
+      ------------
     /
 * and so on...
 
