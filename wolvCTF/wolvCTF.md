@@ -51,17 +51,23 @@ here here
 We must write a script to compute the first XOR, 0x41 ^ 0x36, which resolves to 'w', then XOR the result with the first element of our list above ^^ , then XOR that result with the next element, ... and so on....
 
 * 0x41 ^ 0x36 == 0x57 == 'w'
+
                   /
       ------------
     /
+
 * 0x57 ^ 0x14 == 0x63 == 'c'
+
                   /
       ------------
     /
+
 * result ^ next arr[i] == next char
+
                   /
       ------------
     /
+    
 * and so on...
 
 We can write a python3 script to solve:
