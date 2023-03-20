@@ -5,7 +5,7 @@ A great set of challenges. I didn't have much time this weekend, so I tried my h
 
 * [homework_help](./homework_help)
 * [overflow.py](./overflow.py)
-* [rev](./solve.py)
+* [solve.py](./solve.py)
 
 ## 1. Homework Help
 
@@ -33,7 +33,7 @@ Eval checks the input. If '3' is entered, it asks us to guess the flag, reading 
 
 ![flag](./stack_chk2.png)
 
-Perfect, this is where the magic happens; if you write to the flag buffer in eval() and trigger a stack check failure in ask(), __stack_chk_fail() will XOR our input against a series of values on the stack to tell us if our flag is correct.
+Perfect, this is where the magic happens; if you write to the flag buffer in eval() and trigger a stack check failure in ask(), __stack_chk_fail() will XOR our input against a series of xor keys on the stack to tell us if our flag is correct.
 
 * Note: we won't perform this overflow. We know the keys and we know the first XOR, 0x41 ^ 0x36, which resolves to 'w', that's all we need to calculate the flag. However, if you want to know how to perform the overflow, here's the code: 
 
@@ -57,23 +57,23 @@ print(resp)
 
 Now that we have a picture of what is happening, let's run it through the [Radare2 (r2)](https://github.com/radareorg/radare2) debugger check out the list of XOR keys in memory. 
 
-Here is the artificial XOR key list in memory; these values are what the program suspects will be the result of continued chain of XORs against the input charaters. 
+Here is the xor_keys list in memory; these values are what the program suspects will be the result of continued chain of XORs against the input charaters. 
  
 ![flag](./list.png)
 
 Lets make a list of the keys so we can build a script to perform the XOR chain.
 
 ```python
-bytes_of_interest = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
+xor_keys = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
 ```
 
-We must write a script to compute the first XOR, 0x41 ^ 0x36, which resolves to 'w', then XOR the result with the first element of the artificial list, then XOR that result with the second element, ... and so on....
+We must write a script to compute the first XOR, 0x41 ^ 0x36, which resolves to 'w', then XOR the result with the first element of the xor_keys array, then XOR that result with the second element, ... and so on....
 
 Which will look like:
 * 0x41 ^ 0x36  == result1
-* result1 ^ next arr[i] == result2
-* result2 ^ next arr[i+1] == result3
-* result3 ^ next arr[i+2] == result4
+* result1 ^ next xor_keys[i] == result2
+* result2 ^ next xor_keys[i+1] == result3
+* result3 ^ next xor_keys[i+2] == result4
 * and so on...
 
 * 0x41 ^ 0x36 == 0x57 == 'w'
@@ -85,15 +85,15 @@ Which will look like:
 We can write a python3 script to compute the flag:
 
 ```python
-bytes_of_interest = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
-print(bytes_of_interest)
+xor_keys = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
+print(xor_keys)
 
 result = 0x36^0x41
 flag = ""
 flag += chr(result)
 
-for i in range(0,len(bytes_of_interest)):
-    result = result ^ bytes_of_interest[i]
+for i in range(0,len(xor_keys)):
+    result = result ^ xor_keys[i]
     flag+=chr(result)
     
 print(flag)
