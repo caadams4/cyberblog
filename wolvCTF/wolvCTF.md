@@ -1,4 +1,4 @@
-# UTCTF 2023
+# WolvCTF2023
 
 ## Summary
 A great set of challenges. I didn't have much time this weekend, but I tried my hand at one reverse engineering problem and successfully solved it.
