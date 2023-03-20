@@ -49,6 +49,18 @@ resp = p.recv()
 print(resp)
 ```
 
+Now that we have a picture of what is happening, let's run it through the [Radare2 (r2)](https://github.com/radareorg/radare2) debugger check out the list of XOR keys in memory. 
+
+Here is the artificial XOR key list in memory; these values are what the program suspects will be the result of continued chain of XORs against the input charaters. 
+ 
+![flag](./list.png)
+
+Lets make a list of the keys so we can build a script to perform the XOR chain.
+
+```python
+bytes_of_interest = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
+```
+
 We must write a script to compute the first XOR, 0x41 ^ 0x36, which resolves to 'w', then XOR the result with the first element of the artificial list, then XOR that result with the second element, ... and so on....
 
 Which will look like:
@@ -64,19 +76,7 @@ Which will look like:
 * 0x74 ^ 0x12 == 0x66 == 'f'
 * and so on...
 
-Now that we have a picture of what is happening, let's run it through the [Radare2 (r2)](https://github.com/radareorg/radare2) debugger check out the list of XOR keys in memory. 
-
-Here is the artificial XOR key list in memory; these values are what the program suspects will be the result of continued chain of XORs against the input charaters. 
- 
-![flag](./list.png)
-
-Lets make a list of the keys so we can build a script to perform the XOR chain.
-
-```python3
-bytes_of_interest = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
-```
-
-We can write a python3 script to solve:
+We can write a python3 script to compute the flag:
 
 ```python
 bytes_of_interest = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0e,0x3a,0x6a,0x41,0x40,0x57,0x08,0x34,0x3c,0x0b,0x03,0x34,0x28,0x46,0x5f,0x53,0x10,0x50]
