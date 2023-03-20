@@ -3,13 +3,17 @@
 ## Summary
 A great set of challenges. I didn't have much time this weekend, so I tried my hand at one reverse engineering problem and successfully solved it.
 
+* [homework_help](./homework_help)
+* [overflow.py](./overflow.py)
+* [rev](./solve.py)
+
 ## 1. Homework Help
 
 ![flag](./hwhelp.png)
 
 ### Examine the code
 
-The challenge includes one binary file and is reminiscent of an old linscence key crack. Lets download and examine with Ghidra. 
+The challenge includes one binary file and is reminiscent of an old license key crack. Let's download and examine with Ghidra. 
 
 * If you're not familiar with Ghidra, it's a sick NSA tool used to decompile binaries. [Check it out on Github](https://github.com/NationalSecurityAgency/ghidra)
 
@@ -25,15 +29,15 @@ Ask reads in an UNLIMITED amount of input, then calls eval().
 
 ![flag](./eval.png)
 
-Eval checks the input. If '3' is entered, it asks us to guess the flag, reading in 0x21 bytes to the FLAG buffer. Is that all? Really? There needs to be more! Let's check __stack_chk_fail(), as that is the only uncalled function. Remember, in ask(), we can read in UNLIMITED bytes! So, we can overflow the buffer and trigger the stack check failure. If we do this, __stack_chk_fail will be called after eval(), so we will have already written to the flag buffer before triggering the failure. 
+Eval checks the input. If '3' is entered, it asks us to guess the flag, reading in 0x21 bytes to the FLAG buffer. Is that all? Really? There needs to be more! Let's check __stack_chk_fail(), as that is the only uncalled function. Remember, in ask(), we can read in UNLIMITED bytes! So, we can overflow the buffer and trigger the stack check failure. If we do this, __stack_chk_fail() triggers after eval(), so we will have already written to the flag buffer before triggering the failure. 
 
 ![flag](./stack_chk2.png)
 
-Perfect, this is where the magic happens; if you write to the flag buffer in eval() and trigger a buffer overflow in ask(), __stack_chk_fail will XOR our input against a series of values on the stack to tell us if our flag is correct.
+Perfect, this is where the magic happens; if you write to the flag buffer in eval() and trigger a stack check failure in ask(), __stack_chk_fail() will XOR our input against a series of values on the stack to tell us if our flag is correct.
 
 * Note: we won't perform this overflow. We know the keys and we know the first XOR, 0x41 ^ 0x36, which resolves to 'w', that's all we need to calculate the flag. However, if you want to know how to perform the overflow, here's the code: 
 
-```python3
+```python
 from pwn import *
 # using pwntools
 
@@ -48,6 +52,8 @@ p.sendline(b'FLAG_GUESS_HERE')
 resp = p.recv() 
 print(resp)
 ```
+
+### Build a solution
 
 Now that we have a picture of what is happening, let's run it through the [Radare2 (r2)](https://github.com/radareorg/radare2) debugger check out the list of XOR keys in memory. 
 
