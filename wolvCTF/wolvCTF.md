@@ -13,7 +13,7 @@ A great set of challenges. I didn't have much time this weekend, but I tried my 
 
 ### Examine the code
 
-The challenge includes one binary file and is reminiscent of an old license key crack. Let's download and examine with Ghidra. 
+The challenge includes one binary file and is reminiscent of an old license key crack. Let's download the [homework_help](./homework_help) binary and examine with Ghidra. 
 
 * If you're not familiar with Ghidra, it's a sick NSA tool used to decompile binaries. [Check it out on Github](https://github.com/NationalSecurityAgency/ghidra)
 
@@ -55,7 +55,7 @@ print(resp)
 
 ### Build a solution
 
-Now that we have a picture of what is happening, let's run it through [Radare2](https://github.com/radareorg/radare2) (r2) debugger check out the list of XOR keys in memory. 
+Now that we have a picture of what is happening, let's run the [homework_help](./homework_help) binary through [Radare2](https://github.com/radareorg/radare2) (r2) debugger check out the list of XOR keys in memory. 
 
 Here is the XOR key list in memory; these values are what the program suspects will be the result of continued chain of XORs against the input charaters. 
  
@@ -70,16 +70,10 @@ xor_keys = [0x14,0x17,0x12,0x1d,0x50,0x46,0x5d,0x42,0x41,0x6c,0x33,0x5d,0x5a,0x0
 We must write a script to compute the first XOR, 0x41 ^ 0x36, which resolves to 'w', then XOR the result with the first element of the xor_keys array, then XOR that result with the second element, ... and so on....
 
 Which will look like:
-* 0x41 ^ 0x36  == result1
-* result1 ^ next xor_keys[i] == result2
-* result2 ^ next xor_keys[i+1] == result3
-* result3 ^ next xor_keys[i+2] == result4
-* and so on...
-
-* 0x41 ^ 0x36 == 0x57 == 'w'
-* 0x57 ^ 0x14 == 0x63 == 'c'
-* 0x63 ^ 0x17 == 0x74 == 't'
-* 0x74 ^ 0x12 == 0x66 == 'f'
+* 0x41 ^ 0x36  == result1 ('w')
+* result1 ^ next xor_keys[i] == result2 ('c')
+* result2 ^ next xor_keys[i+1] == result3 ('t')
+* result3 ^ next xor_keys[i+2] == result4 ('f')
 * and so on...
 
 We can write a python3 script to compute the flag:
