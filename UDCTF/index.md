@@ -1,9 +1,11 @@
 # UDCTF 2023
 
-I created 3 challenges for the CTF. Here are the problems and intended solutions. Enjoy :)
+I created 9 challenges for the CTF. Here are the problems and intended solutions for 2. I may get to the remaining 7 later. Enjoy :)
 
-## 1 of 3: SIMP
+## 1 of 2: SIMP
 This challenge takes a newbie through their first directory brute force, ssh private key theft, and privesc through exploiting a root cronjob (or Pwnkit), and a reverse shell.
+
+![Alt text](image-11.png)
 
 ### 1. Recon
 
@@ -57,9 +59,36 @@ And there it is
 ![Alt text](image-10.png)
 
 
-## 2 of 4: SQL 4 Dummies
+## 2 of 2: SQL 4 Dummies
 
+An easy SQL injection. The challenge: break into rickjames account.  
 
+![Alt text](image-12.png)
 
+The authentication page:
 
+![Alt text](image-13.png)
 
+Enter some creds to see what happens.
+
+![Alt text](image-14.png)
+
+The username is read back to us. 
+
+![Alt text](image-15.png)
+
+Try to end the sql variable with ' and negate the remaining query with a comment char -- 
+
+![Alt text](image-16.png)
+
+The input was filtered
+
+![Alt text](image-17.png)
+
+Try the same combo of chars inside the same combo of chars
+
+![Alt text](image-18.png)
+
+bingo!
+
+![Alt text](image-19.png)
