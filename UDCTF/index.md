@@ -7,7 +7,7 @@ This challenge takes a newbie through their first directory brute force, ssh pri
 
 ![Alt text](image-11.png)
 
-### 1. Recon
+### Recon
 
 (![Alt text](image.png)
 
