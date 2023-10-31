@@ -1,9 +1,11 @@
 # UDCTF 2023
 
-## Summary
-This is a challenge I authored and featured in the Bluehens CTF that my CTF team hosted from Oct 27-29 2023. Meant to be easy, it takes a newbie through their first dir brute force, ssh private key theft, and privesc through exploiting a root cronjob (or Pwnkit), and a reverse shell. Enjoy :)
+I created 3 challenges for the CTF. Here are the problems and intended solutions. Enjoy :)
 
-## 1. Recon
+## 1 of 3: SIMP
+This challenge takes a newbie through their first directory brute force, ssh private key theft, and privesc through exploiting a root cronjob (or Pwnkit), and a reverse shell.
+
+### 1. Recon
 
 (![Alt text](image.png)
 
@@ -53,3 +55,11 @@ And we wait...
 And there it is 
 
 ![Alt text](image-10.png)
+
+
+## 2 of 4: SQL 4 Dummies
+
+
+
+
+
