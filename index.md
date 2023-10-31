@@ -1,11 +1,11 @@
-# Welcome to my blog
+# Welcome to my space
 
 ## whoami
-A dude, dressed as a dude, disgused as another dude. 
+CTF writeups of problems solved in live CTFs + problems authored by me :). 
 
-Learning the ropes of offensive security. 
+Offensive cyber security Professional. 
 
-Member of the University of Delaware CTF team, the [Bluehens](https://ctftime.org/team/64660/).
+President of the University of Delaware CTF team, the [Bluehens](https://ctftime.org/team/64660/).
 
 ## CTF Writeups 
 * [UTCTF Mar 2023](https://caadams4.github.io/cyberblog/utctf/utctf) (network security x2)
