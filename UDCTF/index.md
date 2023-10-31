@@ -15,19 +15,19 @@ Notice two TCP ports, 22 and 8000. 8000 is an alternate http service so lets che
 Its a webpage... but a placeholder webpage in development. Lets run dirbuster to se eif there's anything interesting in the serving directory.
 
 ![Alt text](image-2.png)
-Big uh-oh on the devs part, see the .ssh directory is accessible (maybe)
+Big uh-oh on the devs part, see the `.ssh` directory is accessible (maybe)
 
 ### Initial Exploitaiton
 
 Lets use that stolen private ssh key to log in to the web server. 
 
 ![Alt text](image-3.png)
-On the web page, the email dave@corpo.com was present. This may be the account for which the stolen key belongs to. 
+On the web page, the email `dave@corpo.com` was present. This may be the account for which the stolen key belongs to. 
 
 ![Alt text](image-4.png)
 Bingo. There's our initial access.
 
-### Priviledge Escalation
+### Privilege Escalation
 
 Now we need to find a way to root.
 
@@ -40,11 +40,11 @@ ROOT is required to do so. THAT is interesting. AND...
 
 ![Alt text](image-6.png)
 
-We're able to edit the send_logs.py file. So I want to add a line to the end to create a file called 'cronjob?' with whoami echoed to the contents.
+We're able to edit the `send_logs.py` file. So I want to add a line to the end to create a file called `'cronjob?'` with `whoami` echoed to the contents.
 
 ![Alt text](image-7.png)
 
-Add a reverse shell payload to the send_logs.py file:
+Add a reverse shell payload to the `send_logs.py` file:
 
 ![Alt text](image-8.png)
 
