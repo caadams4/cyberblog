@@ -29,7 +29,13 @@ On the web page, the email `dave@corpo.com` was present. This may be the account
 ![Alt text](image-4.png)
 Bingo. There's our initial access.
 
+## SIMP II (continuation of SIMP I)
+
+![image](https://github.com/caadams4/cyberblog/assets/79220528/2a274c57-4821-4ea3-a89e-ae6358eb86c8)
+
+
 ### Privilege Escalation
+
 
 Now we need to find a way to root.
 
